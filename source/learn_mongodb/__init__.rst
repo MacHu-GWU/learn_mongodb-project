@@ -2,11 +2,13 @@ learn_mongodb
 =============
 
 .. automodule:: learn_mongodb
-	:members:
+    :members:
 
-subpackage and modules
-----------------------
+sub packages and modules
+------------------------
 
 .. toctree::
    :maxdepth: 1
 
+    zzz_manual_install <zzz_manual_install>
+    
