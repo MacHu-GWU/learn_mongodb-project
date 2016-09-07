@@ -1,2 +1,5 @@
-Welcome to learn_mongodb's documentation!
-=========================================
+.. include:: ../README.rst
+
+
+:ref:`Module Index <modindex>`
+-----------------------------
