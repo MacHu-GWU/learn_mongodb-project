@@ -10,8 +10,10 @@ ref: https://docs.mongodb.com/manual/reference/operator/update/currentDate/
 from datetime import datetime
 import bson
 from learn_mongodb.db_test import col
+from sfm.decorator import run_if_is_main
 
 
+@run_if_is_main(__name__)
 def currentDate_example():
     _id = 1
     col.insert({"_id": _id, "status": "a", "lastModified": datetime(2016, 1, 1)})
@@ -33,7 +35,4 @@ def currentDate_example():
     assert doc["lastModified"] != datetime(2016, 1, 1)
     assert isinstance(doc["cancellation"]["date"], bson.timestamp.Timestamp)
     
-
-if __name__ == "__main__":
-    #
-    currentDate_example()
+currentDate_example()

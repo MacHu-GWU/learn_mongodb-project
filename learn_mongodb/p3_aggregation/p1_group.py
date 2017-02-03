@@ -8,11 +8,11 @@ ref: https://docs.mongodb.com/manual/reference/operator/aggregation/group/
 """
 
 import time
-from sfm.decorator import run_if_is_main
 from learn_mongodb.db_test import col
+from sfm.decorator import run_if_is_main
+
 
 distinct_complexity = 10
-
 
 @run_if_is_main(__name__)
 def prepare_data():

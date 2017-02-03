@@ -6,8 +6,10 @@ Upsert是update和insert的混合: 尝试Update, 如果文档不存在, 则Inser
 """
 
 from learn_mongodb.db_test import col
+from sfm.decorator import run_if_is_main
 
 
+@run_if_is_main(__name__)
 def example():
     """Wrong implement.
     """
@@ -29,8 +31,4 @@ def example():
     assert "name" not in doc
     assert doc["version"] == 3
     
-    
-if __name__ == "__main__":
-    """
-    """
-    example()
+example()

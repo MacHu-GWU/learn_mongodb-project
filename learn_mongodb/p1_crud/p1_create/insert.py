@@ -9,8 +9,10 @@ MongoDB对于每一个客户端程序的所有插入和修改操作, 都会自�
 import random
 import pymongo
 from learn_mongodb.db_test import col
+from sfm.decorator import run_if_is_main
 
 
+@run_if_is_main(__name__)
 def handle_integrity_error():
     for _ in range(20):
         try:
@@ -18,19 +20,14 @@ def handle_integrity_error():
         except pymongo.errors.DuplicateKeyError:
             pass
         
+handle_integrity_error()
+    
 
-if __name__ == "__main__":
-    #
-    handle_integrity_error()
-    
-    
+@run_if_is_main(__name__)    
 def batch_insert():
     col.remove({})
     data = [{"_id": i} for i in range(1, 1 + 10)]
     col.insert(data)
     assert col.find().count() == 10
     
-
-if __name__ == "__main__":
-    #
-    batch_insert()
+batch_insert()

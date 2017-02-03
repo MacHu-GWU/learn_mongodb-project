@@ -8,8 +8,10 @@ ref: https://docs.mongodb.com/manual/reference/operator/update/inc/
 """
 
 from learn_mongodb.db_test import col
+from sfm.decorator import run_if_is_main
 
 
+@run_if_is_main(__name__)
 def inc_example():
     _id = 1
     col.insert({"_id": _id, "value": 0})
@@ -23,7 +25,4 @@ def inc_example():
     doc = col.find_one({"_id": _id})
     assert doc["value"] == -1
 
-
-if __name__ == "__main__":
-    #
-    inc_example()
+inc_example()

@@ -8,8 +8,10 @@ ref: https://docs.mongodb.com/manual/reference/operator/query/elemMatch/
 """
 
 from learn_mongodb.db_test import col
+from sfm.decorator import run_if_is_main
 
 
+@run_if_is_main(__name__)
 def elemMatch_example():
     col.insert([
         {"_id": 1, "results": [ 82, 85, 88 ]},
@@ -18,12 +20,10 @@ def elemMatch_example():
     filters = {"results": {"$elemMatch": {"$gte": 80, "$lt": 85 }}}
     assert list(col.find(filters)) == [{"_id": 1, "results": [ 82, 85, 88 ]}]
     
-
-if __name__ == "__main__":
-    #
-    elemMatch_example()
+elemMatch_example()
     
 
+@run_if_is_main(__name__)
 def array_of_embedded_document():
     col.insert([
         {"_id": 3, "results": [ {"product": "abc", "score": 10}, {"product": "xyz", "score": 5} ]},
@@ -33,7 +33,4 @@ def array_of_embedded_document():
     filters = {"results": {"$elemMatch": {"product": "xyz", "score": {"$gte": 8 } } } }
     assert [doc["_id"] for doc in col.find(filters)] == [5, ]
 
-
-if __name__ == "__main__":
-    #
-    array_of_embedded_document()
+array_of_embedded_document()

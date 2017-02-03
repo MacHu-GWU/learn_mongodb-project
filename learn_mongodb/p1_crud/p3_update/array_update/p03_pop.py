@@ -9,22 +9,30 @@ ref: https://docs.mongodb.com/manual/reference/operator/update/pop/
 """
 
 from learn_mongodb.db_test import col
+from sfm.decorator import run_if_is_main
 
 
+@run_if_is_main(__name__)
 def remove_last_item():
     _id = 1
     col.insert({"_id": _id, "scores": [8, 9, 10]})
     col.update({"_id": _id}, {"$pop": {"scores": 1}})
     assert col.find_one({"_id": _id})["scores"] == [8, 9]
 
+remove_last_item()
 
+
+@run_if_is_main(__name__)
 def remove_first_item():
     _id = 2
     col.insert({"_id": _id, "scores": [8, 9, 10]})
     col.update({"_id": _id}, {"$pop": {"scores": -1}})
     assert col.find_one({"_id": _id})["scores"] == [9, 10]
 
+remove_first_item()
 
+
+@run_if_is_main(__name__)
 def pop_from_empty_array():
     """如果已经是空列表, 则没有影响。
     """
@@ -33,8 +41,4 @@ def pop_from_empty_array():
     col.update({"_id": _id}, {"$pop": {"scores": 1}})
     assert col.find_one({"_id": _id})["scores"] == []
 
-
-if __name__ == "__main__":
-    remove_last_item()
-    remove_first_item()
-    pop_from_empty_array()
+pop_from_empty_array()

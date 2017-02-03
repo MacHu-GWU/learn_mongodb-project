@@ -9,8 +9,10 @@ ref: https://docs.mongodb.com/manual/reference/operator/update/setOnInsert/
 """
 
 from learn_mongodb.db_test import col
+from sfm.decorator import run_if_is_main
 
 
+@run_if_is_main(__name__)
 def setOnInsert_example():
     """
     """
@@ -24,7 +26,4 @@ def setOnInsert_example():
     assert doc["item"] == "apple"
     assert doc["defaultQty"] == 100
 
-
-if __name__ == "__main__":
-    #
-    setOnInsert_example()
+setOnInsert_example()

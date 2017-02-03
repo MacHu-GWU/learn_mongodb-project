@@ -8,8 +8,10 @@ ref: https://docs.mongodb.com/manual/reference/operator/update/pushAll/
 """
 
 from learn_mongodb.db_test import col
+from sfm.decorator import run_if_is_main
 
 
+@run_if_is_main(__name__)
 def push_all_example():
     _id = 1
     col.insert({"_id": _id, "items": [1, 2]})
@@ -17,6 +19,4 @@ def push_all_example():
     doc = col.find_one({"_id": _id})
     assert doc["items"] == [1, 2, 1, 2, 3, 4]
     
-    
-if __name__ == "__main__":
-    push_all_example()
+push_all_example()

@@ -8,8 +8,10 @@ ref: https://docs.mongodb.com/manual/reference/operator/update/pull/
 """
 
 from learn_mongodb.db_test import col
+from sfm.decorator import run_if_is_main
 
 
+@run_if_is_main(__name__)
 def remove_all_items_that_equals_a_specified_value():
     col.insert([
         {
@@ -38,13 +40,20 @@ def remove_all_items_that_equals_a_specified_value():
     assert doc2["vegetables"] == ["broccoli", "zucchini", "onions"]
 
 
+remove_all_items_that_equals_a_specified_value()
+
+    
+@run_if_is_main(__name__)
 def remove_all_items_that_match_a_specified_condition():
     _id = 3
     col.insert({"_id": _id, "votes": [3, 5, 6, 7, 7, 8]})
     col.update({"_id": _id}, {"$pull": {"votes": {"$gte": 6}}})
     assert col.find_one({"_id": _id})["votes"] == [3, 5]
     
+remove_all_items_that_match_a_specified_condition()
 
+
+@run_if_is_main(__name__)
 def remove_items_from_an_array_of_documents():
     col.insert([
         {
@@ -74,7 +83,10 @@ def remove_items_from_an_array_of_documents():
     doc5 = col.find_one({"_id": 5})
     assert len(doc5["results"]) == 2
 
+remove_items_from_an_array_of_documents()
 
+
+@run_if_is_main(__name__)
 def with_element_match():
     """Because $pull operator applies its query to each element as though it 
     were a top-level object, the expression did not require the use of 
@@ -83,8 +95,3 @@ def with_element_match():
     详情请参考官方文档。
     """
     
-    
-if __name__ == "__main__":
-    remove_all_items_that_equals_a_specified_value()
-    remove_all_items_that_match_a_specified_condition()
-    remove_items_from_an_array_of_documents()

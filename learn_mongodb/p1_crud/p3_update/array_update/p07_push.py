@@ -9,16 +9,21 @@ ref: https://docs.mongodb.com/manual/reference/operator/update/push/
 """
 
 from learn_mongodb.db_test import col
+from sfm.decorator import run_if_is_main
 
 
+@run_if_is_main(__name__)
 def push_example():
     _id = 1
     col.insert({"_id": _id, "items": [1, 2, 3]})
     col.update({"_id": _id}, {"$push": {"items": 9}})
     doc = col.find_one({"_id": _id})
     assert doc["items"] == [1, 2, 3, 9]
-    
 
+push_example()
+
+
+@run_if_is_main(__name__)
 def position_example():
     """插入多个元素到指定位置, 必须和$each配合使用。
     
@@ -29,8 +34,11 @@ def position_example():
     col.update({"_id": _id}, {"$push": {"items": {"$each": [4, 5], "$position": 2}}})
     doc = col.find_one({"_id": _id})
     assert doc["items"] == [1, 2, 4, 5, 3]
-    
 
+position_example()
+
+
+@run_if_is_main(__name__)
 def sort_example():
     """对列表进行排序, 必须和$each配合使用。
     
@@ -88,8 +96,11 @@ def sort_example():
     doc = col.find_one({"_id": _id})
     assert [d["col_1"] for d in doc["table"]] == [1, 1, 2, 3]
     assert [d["col_2"] for d in doc["table"]] == [4, 9, 7, 4]
-    
 
+sort_example()
+
+
+@run_if_is_main(__name__)
 def slice_example():
     """对列表进行切片。
     
@@ -116,11 +127,5 @@ def slice_example():
     col.update({"_id": _id}, {"$push": {"items": {"$each": [4, 5], "$slice": 0}}})
     doc = col.find_one({"_id": _id})
     assert doc["items"] == []
-    
-    
 
-if __name__ == "__main__":
-    push_example()
-    position_example()
-    sort_example()
-    slice_example()
+slice_example()

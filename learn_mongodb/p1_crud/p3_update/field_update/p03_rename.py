@@ -10,8 +10,10 @@ ref: https://docs.mongodb.com/manual/reference/operator/update/rename/
 """
 
 from learn_mongodb.db_test import col
+from sfm.decorator import run_if_is_main
 
 
+@run_if_is_main(__name__)
 def rename_example():
     """
     """
@@ -29,7 +31,4 @@ def rename_example():
     assert "name" not in doc["people"]
     assert "username" in doc["people"]
 
-
-if __name__ == "__main__":
-    #
-    rename_example()
+rename_example()

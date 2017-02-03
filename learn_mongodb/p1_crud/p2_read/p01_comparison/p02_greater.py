@@ -8,6 +8,7 @@ less than ("$lt"), less equal than ("$lte")的运作方式与之类似。
 
 from datetime import datetime
 from learn_mongodb.db_test import col
+from sfm.decorator import run_if_is_main
 
 if __name__ == "__main__":
     data = [
@@ -19,6 +20,7 @@ if __name__ == "__main__":
     col.insert(data)
 
 
+@run_if_is_main(__name__)
 def gt():
     """{field: {"$gt": value}} 相当于field的值大于value。
     """
@@ -26,12 +28,10 @@ def gt():
     results = list(col.find(filters))
     assert [doc["name"] for doc in results] == ["John", "Mike"]
 
-
-if __name__ == "__main__":
-    #
-    gt()
+gt()
 
 
+@run_if_is_main(__name__)
 def gt_with_str():
     """对于字符串, 按照其Ascii编码的顺序排序。英文字母的ASCII编码顺序从小到大
     是从A-Z, a-z。
@@ -41,11 +41,10 @@ def gt_with_str():
     assert [doc["name"] for doc in results] == ["Mike", "Sara"]
 
 
-if __name__ == "__main__":
-    #
-    gt_with_str()
+gt_with_str()
 
 
+@run_if_is_main(__name__)
 def gt_with_datetime():
     """对于时间, 越晚的时间就越大。
     """
@@ -54,6 +53,4 @@ def gt_with_datetime():
     assert [doc["name"] for doc in results] == ["Mike", "Sara"]
 
 
-if __name__ == "__main__":
-    #
-    gt_with_datetime()
+gt_with_datetime()

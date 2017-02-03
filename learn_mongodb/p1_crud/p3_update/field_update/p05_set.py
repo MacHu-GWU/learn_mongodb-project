@@ -9,8 +9,10 @@ ref: https://docs.mongodb.com/manual/reference/operator/update/set/
 
 import pytest
 from learn_mongodb.db_test import col
+from sfm.decorator import run_if_is_main
 
 
+@run_if_is_main(__name__)
 def set_example():
     _id = 1
     col.insert({"_id": _id, "value": 0})
@@ -22,7 +24,4 @@ def set_example():
     with pytest.raises(Exception):
         col.update({"_id": _id}, {"$set": {"_id": 2}})
 
-
-if __name__ == "__main__":
-    #
-    set_example()
+set_example()

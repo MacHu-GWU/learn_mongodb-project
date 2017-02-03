@@ -8,8 +8,10 @@ ref: https://docs.mongodb.com/manual/reference/operator/update/set/
 """
 
 from learn_mongodb.db_test import col
+from sfm.decorator import run_if_is_main
 
 
+@run_if_is_main(__name__)
 def unset_example():
     _id = 1
     col.insert({"_id": _id, "value": 0})
@@ -17,7 +19,4 @@ def unset_example():
     doc = col.find_one({"_id": _id})
     assert "value" not in doc
 
-
-if __name__ == "__main__":
-    #
-    unset_example()
+unset_example()

@@ -7,6 +7,8 @@ Welcome to learn_mongodb Documentation
 ======================================
 This project is my notes and preps for `MongoDB Certified Developer Associate Exam <https://university.mongodb.com/exam/DEVELOPER/about>`_.
 
+And it's a quick MongoDB syntax reference book.
+
 
 **Quick Links**
 -------------------------------------------------------------------------------

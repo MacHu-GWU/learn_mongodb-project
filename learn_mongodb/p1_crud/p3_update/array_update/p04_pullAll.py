@@ -10,15 +10,20 @@ ref: https://docs.mongodb.com/manual/reference/operator/update/pullAll/
 """
 
 from learn_mongodb.db_test import col
+from sfm.decorator import run_if_is_main
 
 
+@run_if_is_main(__name__)
 def pull_all_example():
     _id = 1
     col.insert({"_id": _id, "scores": [ 0, 2, 5, 5, 1, 0 ]})
     col.update({"_id": _id}, {"$pullAll": {"scores": [0, 5]}})
     assert col.find_one({"_id": _id})["scores"] == [2, 1]
 
+pull_all_example()
 
+
+@run_if_is_main(__name__)
 def pull_all_non_generic_item():
     """pull all可以匹配复杂, 嵌套的数据结构。
     """
@@ -36,7 +41,4 @@ def pull_all_non_generic_item():
     doc = col.find_one({"_id": _id})
     assert doc["user"] == [{"name": "Tom"},] 
 
-
-if __name__ == "__main__":
-    pull_all_example()
-    pull_all_non_generic_item()
+pull_all_non_generic_item()

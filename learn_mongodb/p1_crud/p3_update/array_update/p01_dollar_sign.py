@@ -14,8 +14,10 @@ ref: https://docs.mongodb.com/manual/reference/operator/update/positional/#updat
 """
 
 from learn_mongodb.db_test import col
+from sfm.decorator import run_if_is_main
 
 
+@run_if_is_main(__name__)
 def update_values_in_an_array():
     """如果更新的对象是array field里的值。
     """
@@ -29,6 +31,10 @@ def update_values_in_an_array():
     assert doc["grades"] == [82, 85, 90, 80]  # The second 80 is not updated
 
 
+update_values_in_an_array()
+
+
+@run_if_is_main(__name__)
 def update_documents_in_an_array():
     """如果更新对象是doc array中的某个field。
     """
@@ -51,7 +57,10 @@ def update_documents_in_an_array():
     # The fourth doc (second match) is not updated
     assert doc["grades"][3]["std"] == 9
 
+update_documents_in_an_array()
 
+
+@run_if_is_main(__name__)
 def update_embedded_documents_using_multiple_field_matches():
     """当query有关多个field时, 使用$elemMatch
     """
@@ -77,8 +86,4 @@ def update_embedded_documents_using_multiple_field_matches():
     # The fourth doc (second match) is not updated
     assert doc["grades"][3]["std"] == 9
 
-
-if __name__ == "__main__":
-    update_values_in_an_array()
-    update_documents_in_an_array()
-    update_embedded_documents_using_multiple_field_matches()
+update_embedded_documents_using_multiple_field_matches()

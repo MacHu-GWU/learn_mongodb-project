@@ -26,8 +26,10 @@ thumb_up的值就加N。但是如果这些客户端在一个很短的时间内�
 """
 
 from learn_mongodb.db_test import col
+from sfm.decorator import run_if_is_main
 
 
+@run_if_is_main(__name__)
 def thumb_up_by_id_v1(_id):
     """Wrong implement.
     """
@@ -35,7 +37,8 @@ def thumb_up_by_id_v1(_id):
     if doc:
         col.update({"_id": _id}, {"$set": {"thumb_up": doc["thumb_up"] + 1}})
         
-        
+
+@run_if_is_main(__name__)
 def thumb_up_by_id_v2(_id):
     """Correct implement.
     """

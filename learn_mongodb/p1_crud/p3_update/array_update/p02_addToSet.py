@@ -9,8 +9,10 @@ ref: https://docs.mongodb.com/manual/reference/operator/update/addToSet/
 """
 
 from learn_mongodb.db_test import col
+from sfm.decorator import run_if_is_main
 
 
+@run_if_is_main(__name__)
 def add_to_a_not_existed_field():
     """如果field不存在, 则自动新建一个空列表。
     """
@@ -19,7 +21,10 @@ def add_to_a_not_existed_field():
     col.update({"_id": _id}, {"$addToSet": {"tags": "electronics"}})
     assert col.find_one({"_id": _id})["tags"] == ["electronics", ]
 
+add_to_a_not_existed_field()
 
+
+@run_if_is_main(__name__)
 def add_to_array():
     """添加单个元素到set array。
     """
@@ -33,7 +38,10 @@ def add_to_array():
     assert col.find_one({"_id": _id})["tags"] == [
         "electronics", "camera", "accessories"]
 
+add_to_array()
 
+
+@run_if_is_main(__name__)
 def value_already_exists():
     """若添加的元素已经存在, 则不作任何变化。
     """
@@ -46,7 +54,10 @@ def value_already_exists():
     col.update({"_id": _id}, {"$addToSet": {"tags": "camera"}})
     assert col.find_one({"_id": _id})["tags"] == ["electronics", "camera"]
 
+value_already_exists()
 
+
+@run_if_is_main(__name__)
 def each_modifier():
     """$each操作符允许一次添加多个元素。
     """
@@ -64,9 +75,4 @@ def each_modifier():
     assert col.find_one({"_id": _id})["tags"] == [
         "electronics", "supplies", "camera", "accessories"]
 
-
-if __name__ == "__main__":
-    add_to_a_not_existed_field()
-    add_to_array()
-    value_already_exists()
-    each_modifier()
+each_modifier()

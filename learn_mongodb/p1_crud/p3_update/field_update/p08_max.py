@@ -8,8 +8,10 @@ ref: https://docs.mongodb.com/manual/reference/operator/update/max/
 """
 
 from learn_mongodb.db_test import col
+from sfm.decorator import run_if_is_main
 
 
+@run_if_is_main(__name__)
 def max_example():
     _id = 1
     col.insert({"_id": _id, "value": 0})
@@ -26,7 +28,4 @@ def max_example():
     doc = col.find_one({"_id": _id})
     assert doc["value"] == 1
 
-
-if __name__ == "__main__":
-    #
-    max_example()
+max_example()
