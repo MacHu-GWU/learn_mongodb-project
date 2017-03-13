@@ -11,5 +11,7 @@ sub packages and modules
    :maxdepth: 1
 
     compound_index <compound_index>
-    meta <meta>
+    geo2dsphere_index <geo2dsphere_index>
+    geo2d_index <geo2d_index>
+    multikey_index <multikey_index>
     

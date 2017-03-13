@@ -9,7 +9,7 @@ order.
 Recommend to use: https://github.com/MacHu-GWU/mongomock-sanhe.git
 """
 
-USE_MONGOMOCK = True
+USE_MONGOMOCK = False
 
 if not USE_MONGOMOCK:
     import pymongo

@@ -3,13 +3,16 @@
 
 import docfly
 
+# Uncomment this if you follow Sanhe's Sphinx Doc Style Guide
+#--- Manually Made Doc ---
 doc = docfly.DocTree("source")
-doc.fly()
+doc.fly(table_of_content_header="Table of Content (目录)")
 
+#--- Api Reference Doc ---
 package_name = "learn_mongodb"
-     
+
 doc = docfly.ApiReferenceDoc(
-    package_name, 
+    package_name,
     dst="source",
     ignore=[
         "%s.zzz_manual_install.py" % package_name,
