@@ -21,8 +21,8 @@ if __name__ == "__main__":
 def not_in_for_non_array_field():
     """对于non array field, 只要该项的值在$nin中出现, 即算不满足匹配条件。
     """
-    filters = {"lastname": {"$in": ["Neil", "Shin"]}}
-    assert [doc["_id"] for doc in col.find(filters)] == ["EN-02", "EN-03"]
+    filters = {"lastname": {"$nin": ["Neil", "Shin"]}}
+    assert [doc["_id"] for doc in col.find(filters)] == ["EN-01",]
 
 not_in_for_non_array_field()
 
